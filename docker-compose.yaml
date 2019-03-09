@@ -1,0 +1,231 @@
+version: '3'
+services:
+  consul:
+    image: consul
+    restart: always
+    ports:
+      - 8500:8500
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    restart: always
+    ports:
+    - 80:80
+    - 2003:2003
+    - 2004:2004
+    - 2023:2023
+    - 2024:2024
+    - 8125:8125/udp
+    - 8126:8126
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+    - 3000:3000
+    links:
+    - graphite
+    environment:
+    - GF_SECURITY_ADMIN_PASSWORD=admin
+  blackhole:
+    image: anycollect/anycollect
+    container_name: blackhole
+    restart: always
+    links:
+    - graphite
+    volumes:
+    - ${PWD}/blackhole/blackhole.yaml:/anycollect.yaml
+    environment:
+    - GRAPHITE_HOST=graphite
+    - GRAPHITE_PORT=2003
+    - BLACKHOLE_PORT=6000
+  jmxtrans:
+    build:
+      context: ./jmxtrans
+    container_name: jmxtrans
+    restart: always
+    links:
+    - consul
+    - blackhole
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9010
+    - SERVICE_ID=jmxtrans
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9010:9010
+  fastjmx:
+    build:
+      context: ./fastjmx
+    container_name: fastjmx
+    restart: always
+    links:
+    - consul
+    - blackhole
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9145
+    - SERVICE_ID=fastjmx
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9145:9145
+  anycollect:
+    image: anycollect/anycollect
+    restart: always
+    container_name: anycollect
+    links:
+    - consul
+    - blackhole
+    - graphite
+    volumes:
+    - ${PWD}/anycollect/anycollect.yaml:/anycollect.yaml
+    environment:
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    - GRAPHITE_HOST=graphite
+    - GRAPHITE_PORT=2003
+    - BLACKHOLE_HOST=blackhole
+    - BLACKHOLE_PORT=6000
+# Stubs
+  stub-0:
+    image: anycollect/jmx-stub
+    container_name: stub-0
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9100
+    - SERVICE_ID=stub-0
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9100:9100
+  stub-1:
+    image: anycollect/jmx-stub
+    container_name: stub-1
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9101
+    - SERVICE_ID=stub-1
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9101:9101
+  stub-2:
+    image: anycollect/jmx-stub
+    container_name: stub-2
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9111
+    - SERVICE_ID=stub-2
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9111:9111
+  stub-3:
+    image: anycollect/jmx-stub
+    container_name: stub-3
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9103
+    - SERVICE_ID=stub-3
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9103:9103
+  stub-4:
+    image: anycollect/jmx-stub
+    container_name: stub-4
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9104
+    - SERVICE_ID=stub-4
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9104:9104
+  stub-5:
+    image: anycollect/jmx-stub
+    container_name: stub-5
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9105
+    - SERVICE_ID=stub-5
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9105:9105
+  stub-6:
+    image: anycollect/jmx-stub
+    container_name: stub-6
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9106
+    - SERVICE_ID=stub-6
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9106:9106
+  stub-7:
+    image: anycollect/jmx-stub
+    container_name: stub-7
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9107
+    - SERVICE_ID=stub-7
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9107:9107
+  stub-8:
+    image: anycollect/jmx-stub
+    container_name: stub-8
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9108
+    - SERVICE_ID=stub-8
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9108:9108
+  stub-9:
+    image: anycollect/jmx-stub
+    container_name: stub-9
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9109
+    - SERVICE_ID=stub-9
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9109:9109
