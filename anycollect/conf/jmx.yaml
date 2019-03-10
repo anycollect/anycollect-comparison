@@ -3,6 +3,7 @@ extensions:
   extension: Measurers
   instance: measurers
   scope: local
+  injectMode: auto
   config:
     families:
     - name: sample-histogram
