@@ -21,7 +21,7 @@ extensions:
       group: anycollect
       period: 10
     - filter: "servers.*"
-      group: jmxtrans-1
+      group: jmxtrans
       period: 10
 # --- GRAPHITE ---
 - !load
