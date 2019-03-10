@@ -14,14 +14,14 @@ extensions:
   instance: discrepancy
   config:
     rules:
-    - filter: "cassandra.*"
-      group: anycollect
-      period: 5
     - filter: "stub.*"
-      group: fastjmx
+      group: anycollect
       period: 10
     - filter: "servers.*"
       group: jmxtrans
+      period: 10
+    - filter: "fastjmx.*"
+      group: fastjmx
       period: 10
 # --- GRAPHITE ---
 - !load
