@@ -1,0 +1,56 @@
+extensions:
+- !load
+  extension: DummyDeserializer
+  instance: dummy
+- !load
+  extension: NettyAsyncSocketReader
+  instance: blackhole
+  dependencies:
+    deserializer: !ref dummy
+  config:
+    port: !var BLACKHOLE_PORT
+- !load
+  extension: DiscrepancyProcessor
+  instance: discrepancy
+  config:
+    rules:
+    - filter: "cassandra.*"
+      group: anycollect
+      period: 5
+    - filter: "stub.*"
+      group: anycollect
+      period: 10
+    - filter: "servers.*"
+      group: jmxtrans-1
+      period: 10
+# --- GRAPHITE ---
+- !load
+  extension: SocketWriter
+  instance: graphite
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+# --- ROUTER --
+- !load
+  extension: Router
+  instance: router
+  dependencies:
+    readers: !refs
+    - selfReader
+    - blackhole
+    processors: !refs
+    - discrepancy
+    writers: !refs
+    - graphite
+    - slf4j
+  config:
+    topology:
+    - from: blackhole
+      to: discrepancy
+    - from: discrepancy
+      to: slf4j
+    - from: discrepancy
+      to: graphite

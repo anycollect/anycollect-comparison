@@ -34,7 +34,7 @@ services:
     links:
     - graphite
     volumes:
-    - ${PWD}/blackhole/blackhole.yaml:/anycollect.yaml
+    - ${PWD}/blackhole/conf/:/conf/
     environment:
     - GRAPHITE_HOST=graphite
     - GRAPHITE_PORT=2003
@@ -80,7 +80,7 @@ services:
     - blackhole
     - graphite
     volumes:
-    - ${PWD}/anycollect/anycollect.yaml:/anycollect.yaml
+    - ${PWD}/anycollect/conf/:/conf/
     environment:
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500

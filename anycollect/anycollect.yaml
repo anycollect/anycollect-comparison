@@ -2,6 +2,9 @@ extensions:
 - !load
   extension: SelfDiscovery
   instance: self
+  scope: global
+  injectMode: auto
+  priority: default
 - !load
   extension: MeterRegistry
   instance: registry

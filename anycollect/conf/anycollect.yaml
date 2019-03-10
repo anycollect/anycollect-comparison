@@ -1,0 +1,54 @@
+extensions:
+# Graphite
+- !load
+  extension: SocketWriter
+  instance: graphite
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+# Blackhole
+- !load
+  extension: SocketWriter
+  instance: blackhole
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var BLACKHOLE_HOST
+    port: !var BLACKHOLE_PORT
+    protocol: TCP
+# Router
+- !load
+  extension: Router
+  instance: router
+  dependencies:
+    readers: !refs
+    - selfReader
+    - jmx
+    processors: []
+    writers: !refs
+    - slf4j
+    - graphite
+    - blackhole
+  config:
+    topology:
+    - from: selfReader
+      to: slf4j
+    - from: selfReader
+      to: graphite
+    - from: jmx
+      to: graphite
+      filters:
+      - type: acceptKey
+        startsWith: "anycollect"
+      - type: acceptKey
+        startsWith: "jvm"
+      - type: acceptKey
+        startsWith: "instances"
+      - type: deny
+    - from: jmx
+      to: blackhole
+      filters:
+      - type: accept

@@ -1,0 +1,22 @@
+extensions:
+- !load
+  extension: PullEngine
+  instance: puller
+  injectMode: auto
+  scope: global
+  priority: override
+  config:
+    updatePeriod: 10 # expired timeout
+    pullPeriod: 10
+    defaultPoolSize: 1
+    rules:
+    - targetId: "cassandra-.*"
+      poolSize: 2
+    - targetId: "jmxtrans-.*"
+      poolSize: 1
+    - targetId: "stub-.*"
+      poolSize: 2
+    healthChecks:
+      period: 20
+      timeout: 5
+      checks: []

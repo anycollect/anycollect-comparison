@@ -1,0 +1,5 @@
+init: init.yaml
+custom:
+- core.yaml
+- jmx.yaml
+- anycollect.yaml
