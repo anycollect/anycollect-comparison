@@ -18,7 +18,7 @@ extensions:
       group: anycollect
       period: 5
     - filter: "stub.*"
-      group: anycollect
+      group: fastjmx
       period: 10
     - filter: "servers.*"
       group: jmxtrans
