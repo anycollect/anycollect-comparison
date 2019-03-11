@@ -8,13 +8,13 @@ poolSize=$(curl "http://$CONSUL_HOST:$CONSUL_PORT/v1/kv/jmxtrans/poolSize?raw")
 echo "poolSize: $poolSize"
 echo "separatePoolEnabled $separatePoolEnabled"
 
-if [[ $separatePoolEnabled == "true" ]]
-  if [[ -z $poolSize ]]
+if [[ $separatePoolEnabled == "true" ]]; then
+  if [[ -z $poolSize ]]; then
     export EXTRA_OPTS="--use-separate-executors "
   else
     export EXTRA_OPTS="--use-separate-executors --query-processor-executor-pool-size $poolSize "
   fi
-elif [[ -z $poolSize ]]
+elif [[ -z $poolSize ]]; then
     export EXTRA_OPTS="--query-processor-executor-pool-size $poolSize "
 fi
 echo "http://$CONSUL_HOST:$CONSUL_PORT/v1/kv/anycollect/jmx/$SERVICE_ID"
