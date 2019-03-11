@@ -125,12 +125,12 @@ services:
     - consul
     environment:
     - JMX_HOST
-    - JMX_PORT=9111
+    - JMX_PORT=9102
     - SERVICE_ID=stub-2
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
     ports:
-    - 9111:9111
+    - 9102:9102
   stub-3:
     image: anycollect/jmx-stub
     container_name: stub-3
@@ -229,3 +229,59 @@ services:
     - CONSUL_PORT=8500
     ports:
     - 9109:9109
+  stub-10:
+    image: anycollect/jmx-stub
+    container_name: stub-10
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9110
+    - SERVICE_ID=stub-10
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9110:9110
+  stub-11:
+    image: anycollect/jmx-stub
+    container_name: stub-11
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9111
+    - SERVICE_ID=stub-11
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9111:9111
+  stub-12:
+    image: anycollect/jmx-stub
+    container_name: stub-12
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9112
+    - SERVICE_ID=stub-12
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9112:9112
+  stub-13:
+    image: anycollect/jmx-stub
+    container_name: stub-13
+    restart: always
+    links:
+    - consul
+    environment:
+    - JMX_HOST
+    - JMX_PORT=9113
+    - SERVICE_ID=stub-13
+    - CONSUL_HOST=consul
+    - CONSUL_PORT=8500
+    ports:
+    - 9113:9113
