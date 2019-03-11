@@ -13,7 +13,6 @@ RUN wget https://releases.hashicorp.com/consul-template/0.20.0/consul-template_0
     cp /consul-template /bin/consul-template
 COPY jmxtrans.yaml.tpl /etc/jmxtrans.yaml.tpl
 COPY restart.sh /restart.sh
-COPY set-env.sh.tpl /etc/set-env.sh.tpl
 RUN chmod +x restart.sh
 
 ENV JMX_HOST $JMX_HOST
@@ -22,4 +21,4 @@ ENV CONSUL_HOST $CONSUL_HOST
 ENV CONSUL_PORT $CONSUL_PORT
 ENV MONITOR_OPTS "-Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=${JMX_HOST}"
 
-ENTRYPOINT consul-template -consul-addr "${CONSUL_HOST}:${CONSUL_PORT}" -template "/etc/set-env.sh.tpl:/set-env.sh" -template "/etc/jmxtrans.yaml.tpl:/jmxtrans-270/conf/jmxtrans.yaml:/restart.sh"
+ENTRYPOINT consul-template -consul-addr "${CONSUL_HOST}:${CONSUL_PORT}" -template "/etc/jmxtrans.yaml.tpl:/jmxtrans-270/conf/jmxtrans.yaml:/restart.sh"
