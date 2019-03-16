@@ -36,9 +36,14 @@ services:
     volumes:
     - ${PWD}/blackhole/conf/:/conf/
     environment:
+    - JMX_HOST
+    - JMX_PORT=9001
     - GRAPHITE_HOST=graphite
     - GRAPHITE_PORT=2003
     - BLACKHOLE_PORT=6000
+    ports:
+    - 6000:6000
+    - 9001:9001
   jmxtrans:
     build:
       context: ./jmxtrans
@@ -49,12 +54,12 @@ services:
     - blackhole
     environment:
     - JMX_HOST
-    - JMX_PORT=9010
+    - JMX_PORT=9002
     - SERVICE_ID=jmxtrans
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
     ports:
-    - 9010:9010
+    - 9002:9002
   fastjmx:
     build:
       context: ./fastjmx
@@ -65,12 +70,12 @@ services:
     - blackhole
     environment:
     - JMX_HOST
-    - JMX_PORT=9145
+    - JMX_PORT=9003
     - SERVICE_ID=fastjmx
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
     ports:
-    - 9145:9145
+    - 9003:9003
   anycollect:
     image: anycollect/anycollect
     restart: always
@@ -82,12 +87,16 @@ services:
     volumes:
     - ${PWD}/anycollect/conf/:/conf/
     environment:
+    - JMX_HOST
+    - JMX_PORT=9000
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
     - GRAPHITE_HOST=graphite
     - GRAPHITE_PORT=2003
     - BLACKHOLE_HOST=blackhole
     - BLACKHOLE_PORT=6000
+    ports:
+    - 9000:9000
 # Stubs
   stub-0:
     image: anycollect/jmx-stub
