@@ -25,6 +25,7 @@ extensions:
   instance: router
   dependencies:
     readers: !refs
+    - system
     - selfReader
     - jmx
     processors: []
@@ -36,6 +37,8 @@ extensions:
     topology:
     - from: selfReader
       to: slf4j
+    - from: system
+      to: graphite
     - from: selfReader
       to: graphite
     - from: jmx
