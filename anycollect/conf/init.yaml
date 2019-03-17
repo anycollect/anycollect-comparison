@@ -1,5 +1,11 @@
 extensions:
 - !load
+  extension: SelfDiscovery
+  instance: self
+  injectMode: auto
+  scope: global
+  priority: override
+- !load
   extension: MeterRegistry
   instance: registry
   injectMode: auto
