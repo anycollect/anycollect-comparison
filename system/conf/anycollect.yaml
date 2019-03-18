@@ -18,7 +18,7 @@ extensions:
   dependencies:
     discovery: !ref consul
   config:
-    period: 5
+    period: 10
 - !load
   extension: SocketWriter
   instance: graphite
