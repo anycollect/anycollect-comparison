@@ -33,6 +33,7 @@ extensions:
   instance: router
   dependencies:
     readers: !refs
+    - system
     - processReader
     processors: []
     writers: !refs
