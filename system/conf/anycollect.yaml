@@ -1,0 +1,48 @@
+extensions:
+- !load
+  extension: ConsulKv
+  instance: consulKv
+  config:
+    host: !var CONSUL_HOST
+    port: !var CONSUL_PORT
+- !load
+  extension: KvProcessDiscovery
+  instance: consul
+  dependencies:
+    kv: !ref consulKv
+  config:
+    key: anycollect/processes/
+- !load
+  extension: ProcessReader
+  instance: processReader
+  dependencies:
+    discovery: !ref consul
+  config:
+    period: 5
+- !load
+  extension: SocketWriter
+  instance: graphite
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+- !load
+  extension: Router
+  instance: router
+  dependencies:
+    readers: !refs
+    - processReader
+    processors: []
+    writers: !refs
+    - slf4j
+    - graphite
+  config:
+    topology:
+    - from: system
+      to: graphite
+    - from: processReader
+      to: graphite
+    - from: processReader
+      to: slf4j
