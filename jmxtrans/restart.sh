@@ -23,6 +23,7 @@ cd /jmxtrans-270/
 export SECONDS_BETWEEN_RUNS="60 $EXTRA_OPTS"
 echo "additional: $SECONDS_BETWEEN_RUNS"
 echo "monitor opts: $MONITOR_OPTS"
+export LOG_LEVEL=error
 ./bin/jmxtrans.sh restart /jmxtrans-270/conf/jmxtrans.yaml
 
 curl \
