@@ -1,32 +1,4 @@
 extensions:
-- !load
-  extension: Measurers
-  instance: measurers
-  scope: local
-  injectMode: auto
-  config:
-    families:
-    - name: sample-histogram
-      measurements:
-      - { id: min, path: Min, type: gauge, stat: min }
-      - { id: max, path: Max, type: gauge, stat: max }
-      - { id: mean, path: Mean, type: gauge, stat: mean }
-      - { id: std, path: StdDev, type: gauge, stat: std }
-      - { id: max_50, path: 50thPercentile, type: gauge, stat: max_50 }
-      - { id: max_75, path: 75thPercentile, type: gauge, stat: max_75 }
-      - { id: max_90, path: 90thPercentile, type: gauge, stat: max_90 }
-      - { id: max_95, path: 95thPercentile, type: gauge, stat: max_95 }
-      - { id: max_99, path: 99thPercentile, type: gauge, stat: max_99 }
-      - { id: max_999, path: 999thPercentile, type: gauge, stat: max_999 }
-    - name: sample-gauge
-      measurements:
-      - { id: value1, path: LongValue, type: gauge, stat: value }
-      - { id: value2, path: DoubleValue, type: gauge, stat: value }
-    - name: sample-counter
-      measurements:
-      - { id: count1, path: LongCount, type: counter, stat: value }
-      - { id: count2, path: DoubleCount, type: counter, stat: value }
-
 # Consul Discovery
 - !load
   extension: KvJavaAppDiscovery
@@ -44,66 +16,49 @@ extensions:
   scope: local
   config:
     queries:
-    - queryId: stub.histogram0
+    - &histogram0
+      key: stub.histogram0
       mbean: "test:name=SampleHistogram0,k2=*,k1=*"
-      families:
-      - what: stub.histogram0
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram1
+      unit: ms
+      tagKeys: [k1, k2]
+      measurements: &histogram
+      - { path: Min, type: gauge, stat: min }
+      - { path: Max, type: gauge, stat: max }
+      - { path: Mean, type: gauge, stat: mean }
+      - { path: StdDev, type: gauge, stat: std }
+      - { path: 50thPercentile, type: gauge, stat: max_50 }
+      - { path: 75thPercentile, type: gauge, stat: max_75 }
+      - { path: 90thPercentile, type: gauge, stat: max_90 }
+      - { path: 95thPercentile, type: gauge, stat: max_95 }
+      - { path: 99thPercentile, type: gauge, stat: max_99 }
+      - { path: 999thPercentile, type: gauge, stat: max_999 }
+    - <<: *histogram0
+      key: stub.histogram1
       mbean: "test:name=SampleHistogram1,k2=*,k1=*"
-      families:
-      - what: stub.histogram1
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram2
+    - <<: *histogram0
+      key: stub.histogram2
       mbean: "test:name=SampleHistogram2,k2=*,k1=*"
-      families:
-      - what: stub.histogram2
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram3
+    - <<: *histogram0
+      key: stub.histogram3
       mbean: "test:name=SampleHistogram3,k2=*,k1=*"
-      families:
-      - what: stub.histogram3
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram4
+    - <<: *histogram0
+      key: stub.histogram4
       mbean: "test:name=SampleHistogram4,k2=*,k1=*"
-      families:
-      - what: stub.histogram4
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram5
+    - <<: *histogram0
+      key: stub.histogram5
       mbean: "test:name=SampleHistogram5,k2=*,k1=*"
-      families:
-      - what: stub.histogram5
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram6
+    - <<: *histogram0
+      key: stub.histogram6
       mbean: "test:name=SampleHistogram6,k2=*,k1=*"
-      families:
-      - what: stub.histogram6
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram7
+    - <<: *histogram0
+      key: stub.histogram7
       mbean: "test:name=SampleHistogram7,k2=*,k1=*"
-      families:
-      - what: stub.histogram7
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram8
+    - <<: *histogram0
+      key: stub.histogram8
       mbean: "test:name=SampleHistogram8,k2=*,k1=*"
-      families:
-      - what: stub.histogram8
-        name: sample-histogram
-        tagKeys: [k1, k2]
-    - queryId: stub.histogram9
+    - <<: *histogram0
+      key: stub.histogram9
       mbean: "test:name=SampleHistogram9,k2=*,k1=*"
-      families:
-      - what: stub.histogram9
-        name: sample-histogram
-        tagKeys: [k1, k2]
 
 # Matcher
 - !load

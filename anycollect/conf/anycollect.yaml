@@ -43,11 +43,7 @@ extensions:
       to: graphite
       filters:
       - type: acceptKey
-        startsWith: "anycollect"
-      - type: acceptKey
         startsWith: "jvm"
-      - type: acceptKey
-        startsWith: "instances"
       - type: deny
     - from: jmx
       to: blackhole
