@@ -1,4 +1,9 @@
 extensions:
+- !load
+  # TODO use noop
+  extension: MeterRegistry
+  instance: registry
+  injectMode: auto
 # --- BLACKHOLE ---
 - !load
   extension: DummyDeserializer
