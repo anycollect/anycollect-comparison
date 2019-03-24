@@ -65,6 +65,7 @@ LoadPlugin java
   JVMArg "-Dcom.sun.management.jmxremote.rmi.port={{ env "JMX_PORT" }}"
   JVMArg "-Dcom.sun.management.jmxremote.port={{ env "JMX_PORT" }}"
   JVMArg "-Djava.class.path=/etc/collectd-api.jar:/etc/collectd-fast-jmx.jar"
+  JVMArg "-Xms512m -Xmx512m"
   # JVMARG "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5009"
 
   LoadPlugin "com.e_gineering.collectd.FastJMX"
