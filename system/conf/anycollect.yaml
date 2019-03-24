@@ -1,5 +1,10 @@
 extensions:
 - !load
+  # TODO use noop
+  extension: MeterRegistry
+  instance: registry
+  injectMode: auto
+- !load
   extension: ConsulKv
   instance: consulKv
   config:
