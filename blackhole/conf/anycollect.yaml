@@ -1,4 +1,5 @@
 extensions:
+# --- BLACKHOLE ---
 - !load
   extension: DummyDeserializer
   instance: dummy
@@ -9,6 +10,7 @@ extensions:
     deserializer: !ref dummy
   config:
     port: !var BLACKHOLE_PORT
+# --- DISCREPANCY ---
 - !load
   extension: DiscrepancyProcessor
   instance: discrepancy
@@ -25,21 +27,30 @@ extensions:
       period: 10
 # --- GRAPHITE ---
 - !load
+  extension: TagGraphiteSerializer
+  instance: toTagGraphite
+  injectMode: manual
+- !load
   extension: SocketWriter
   instance: graphite
+  injectMode: manual
   dependencies:
     format: !ref toTagGraphite
   config:
     host: !var GRAPHITE_HOST
     port: !var GRAPHITE_PORT
     protocol: TCP
+# --- SLF4J ---
+- !load
+  extension: Slf4jWriter
+  instance: slf4j
+  injectMode: manual
 # --- ROUTER --
 - !load
   extension: Router
   instance: router
   dependencies:
     readers: !refs
-    - selfReader
     - blackhole
     processors: !refs
     - discrepancy
