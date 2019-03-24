@@ -60,6 +60,7 @@ services:
     - SERVICE_ID=jmxtrans
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
+    pid: "host"
     ports:
     - 9002:9002
   fastjmx:
@@ -76,6 +77,7 @@ services:
     - SERVICE_ID=fastjmx
     - CONSUL_HOST=consul
     - CONSUL_PORT=8500
+    pid: "host"
     ports:
     - 9003:9003
   anycollect:
@@ -97,6 +99,7 @@ services:
     - GRAPHITE_PORT=2003
     - BLACKHOLE_HOST=blackhole
     - BLACKHOLE_PORT=6000
+    pid: "host"
     ports:
     - 9000:9000
 # Stubs
