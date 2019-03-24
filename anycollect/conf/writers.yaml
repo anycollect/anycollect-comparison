@@ -1,0 +1,30 @@
+- !load
+  extension: TagGraphiteSerializer
+  instance: toTagGraphite
+  injectMode: manual
+- !load
+  extension: Slf4jWriter
+  instance: slf4j
+  injectMode: manual
+# Graphite
+- !load
+  extension: SocketWriter
+  instance: graphite
+  injectMode: manual
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+# Blackhole
+- !load
+  extension: SocketWriter
+  instance: blackhole
+  injectMode: manual
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var BLACKHOLE_HOST
+    port: !var BLACKHOLE_PORT
+    protocol: TCP

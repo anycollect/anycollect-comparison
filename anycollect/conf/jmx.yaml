@@ -60,6 +60,11 @@ extensions:
       key: stub.histogram9
       mbean: "test:name=SampleHistogram9,k2=*,k1=*"
 
+- !load
+  extension: JvmMetrics
+  instance: jvmMetrics
+  scope: local
+
 # Matcher
 - !load
   extension: StaticQueryMatcherResolver # JobFactory, or maybe move to PullEngine?
@@ -81,9 +86,8 @@ extensions:
   scope: global
   dependencies:
     discovery: !refs
-    - jvm # from system
     - consul
     queries: !refs
-    - jvmMetrics # from system
+    - jvmMetrics
     - stubMetrics
     matcher: !ref matcher

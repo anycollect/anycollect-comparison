@@ -2,7 +2,6 @@ extensions:
 - !load
   extension: ConsulKv
   instance: consulKv
-  scope: global
   config:
     host: !var CONSUL_HOST
     port: !var CONSUL_PORT

@@ -1,43 +1,49 @@
 extensions:
-# Graphite
 - !load
-  extension: SocketWriter
-  instance: graphite
-  dependencies:
-    format: !ref toTagGraphite
+  extension: Core
   config:
-    host: !var GRAPHITE_HOST
-    port: !var GRAPHITE_PORT
-    protocol: TCP
-# Blackhole
-- !load
-  extension: SocketWriter
-  instance: blackhole
-  dependencies:
-    format: !ref toTagGraphite
-  config:
-    host: !var BLACKHOLE_HOST
-    port: !var BLACKHOLE_PORT
-    protocol: TCP
-# Router
-- !load
-  extension: Router
-  instance: router
-  dependencies:
-    readers: !refs
-    - system
-    - selfReader
-    - jmx
-    processors: []
-    writers: !refs
-    - slf4j
-    - graphite
-    - blackhole
-  config:
+    export:
+    - file: kv.yaml
+      instances: [consulKv]
+    - file: writers.yaml
+      instances: [slf4j, blackhole, graphite]
+    - file: jmx.yaml
+      instances: [jmx]
+    # commonTags:
+    #   host: !var HOST
+    internalMonitoring:
+      jvm:
+        period: 10
+        enabled: true
+        application: anycollect
+        tags:
+          instance: anycollect
+      process:
+        cpu: true
+        mem: true
+        period: 10
+        tags:
+          instance: anycollect
+      registry:
+        enabled: true
+        globalPrefix: "anycollect"
+        commonMeta:
+          source: internal
+    pull:
+      updatePeriod: 10
+      pullPeriod: 10
+      defaultPoolSize: 1
+      rules:
+      - targetId: "cassandra-.*"
+        poolSize: 2
+      - targetId: "jmxtrans-.*"
+        poolSize: 1
+      - targetId: "stub-.*"
+        poolSize: 2
     topology:
-    - from: selfReader
+    - from: internal
       to: slf4j
-    - from: selfReader
+    - from: internal
       to: graphite
     - from: jmx
       to: graphite
