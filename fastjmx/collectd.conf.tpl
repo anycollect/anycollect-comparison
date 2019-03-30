@@ -45,17 +45,6 @@
 #WriteQueueLimitLow   800000
 
 LoadPlugin java
-LoadPlugin unixsock
-LoadPlugin write_graphite
-
-<Plugin unixsock>
-  SocketFile "/collectd/build/var/run/collectd-unixsock"
-  SocketGroup "collectd"
-  SocketPerms "0660"
-  DeleteSocket false
-</Plugin>
-
-LoadPlugin java
 <Plugin "java">
   JVMArg "-Dcom.sun.management.jmxremote"
   JVMArg "-Dcom.sun.management.jmxremote.local.only=false"
@@ -65,11 +54,10 @@ LoadPlugin java
   JVMArg "-Dcom.sun.management.jmxremote.rmi.port={{ env "JMX_PORT" }}"
   JVMArg "-Dcom.sun.management.jmxremote.port={{ env "JMX_PORT" }}"
   JVMArg "-Djava.class.path=/etc/collectd-api.jar:/etc/collectd-fast-jmx.jar"
-  JVMArg "-Xms512m -Xmx512m"
-  # JVMARG "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5009"
+  #JVMArg "-Xms512m -Xmx512m"
+  #JVMARG "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5009"
 
   LoadPlugin "com.e_gineering.collectd.FastJMX"
-
   <Plugin "FastJMX">
     MaxThreads 256
     CollectInternal true
@@ -464,6 +452,7 @@ LoadPlugin java
   </Plugin>
 </Plugin>
 
+LoadPlugin write_graphite
 <Plugin write_graphite>
   <Node "example">
     Host "{{ key "blackhole/host" }}"

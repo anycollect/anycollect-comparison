@@ -9,35 +9,10 @@ extensions:
       instances: [slf4j, blackhole, graphite]
     - file: jmx.yaml
       instances: [jmx]
-    # commonTags:
-    #   host: !var HOST
-    internalMonitoring:
-      jvm:
-        period: 10
-        enabled: true
-        application: anycollect
-        tags:
-          instance: anycollect
-      process:
-        cpu: true
-        mem: true
-        period: 10
-        tags:
-          instance: anycollect
-      registry:
-        enabled: true
-        globalPrefix: "anycollect"
-        commonMeta:
-          source: internal
     pull:
-      updatePeriod: 10
+      updatePeriod: 20
       pullPeriod: 10
-      defaultPoolSize: 1
       rules:
-      - targetId: "cassandra-.*"
-        poolSize: 2
-      - targetId: "jmxtrans-.*"
-        poolSize: 1
       - targetId: "stub-.*"
         poolSize: 2
     topology:

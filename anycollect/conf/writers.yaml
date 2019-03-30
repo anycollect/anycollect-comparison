@@ -1,16 +1,13 @@
 - !load
-  extension: TagGraphiteSerializer
+  extension: GraphiteSerializer
   instance: toTagGraphite
-  injectMode: manual
 - !load
   extension: Slf4jWriter
   instance: slf4j
-  injectMode: manual
 # Graphite
 - !load
   extension: SocketWriter
   instance: graphite
-  injectMode: manual
   dependencies:
     format: !ref toTagGraphite
   config:
@@ -21,7 +18,6 @@
 - !load
   extension: SocketWriter
   instance: blackhole
-  injectMode: manual
   dependencies:
     format: !ref toTagGraphite
   config:

@@ -32,7 +32,7 @@ extensions:
       period: 10
 # --- GRAPHITE ---
 - !load
-  extension: TagGraphiteSerializer
+  extension: GraphiteSerializer
   instance: toTagGraphite
   injectMode: manual
 - !load
