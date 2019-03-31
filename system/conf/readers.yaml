@@ -5,7 +5,7 @@ extensions:
   config:
     watch:
     - "/var/docker-run/anycollect/run/anycollect.pid"
-    - "/var/docker-run/anycollect/run/blackhole.pid"
+    - "/var/docker-run/blackhole/run/anycollect.pid"
 
 - !load
   extension: ProcessReader
@@ -32,7 +32,7 @@ extensions:
         source: pid.file
         target: process
       values:
-      - source: ".*/(.*)\\.pid"
+      - source: "/var/docker-run/(.*)/run/anycollect\\.pid"
         target: $1
 
 - !load
