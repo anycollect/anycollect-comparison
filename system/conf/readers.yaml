@@ -4,8 +4,8 @@ extensions:
   instance: pids
   config:
     watch:
-    - "/var/run/anycollect.pid"
-    - "/var/run/blackhole.pid"
+    - "/var/docker-run/anycollect/run/anycollect.pid"
+    - "/var/docker-run/anycollect/run/blackhole.pid"
 
 - !load
   extension: ProcessReader
