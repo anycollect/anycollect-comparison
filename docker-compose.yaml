@@ -37,6 +37,7 @@ services:
     - graphite
     volumes:
     - ${PWD}/blackhole/conf/:/conf/
+    - /var/run/blackhole.pid:/var/run/anycollect.pid
     environment:
     - JMX_HOST
     - JMX_PORT=9001
@@ -90,6 +91,7 @@ services:
     - graphite
     volumes:
     - ${PWD}/anycollect/conf/:/conf/
+    - /var/run/anycollect.pid:/var/run/anycollect.pid
     environment:
     - JMX_HOST
     - JMX_PORT=9000

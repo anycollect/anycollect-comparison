@@ -1,0 +1,40 @@
+extensions:
+- !load
+  extension: PidFileProcessDiscovery
+  instance: pids
+  config:
+    watch:
+    - "/var/run/anycollect.pid"
+    - "/var/run/blackhole.pid"
+
+- !load
+  extension: ProcessReader
+  instance: processReader
+  dependencies:
+    discovery: !ref pids
+  config:
+    period: 10
+
+- !load
+  extension: Transformer
+  instance: replacePidFileToProcessName
+  config:
+    source: drop # drop | keep
+    filters:
+    - type: tag
+      state: present
+      key: pid.file
+      reply: accept
+    transformations:
+    - transform: tag
+      source: drop # drop | meta | keep
+      key:
+        source: pid.file
+        target: process
+      values:
+      - source: ".*/(.*)\\.pid"
+        target: $1
+
+- !load
+  extension: SystemReader
+  instance: system

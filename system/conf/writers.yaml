@@ -1,0 +1,16 @@
+extensions:
+- !load
+  extension: GraphiteSerializer
+  instance: toTagGraphite
+- !load
+  extension: SocketWriter
+  instance: graphite
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+- !load
+  extension: Slf4jWriter
+  instance: slf4j

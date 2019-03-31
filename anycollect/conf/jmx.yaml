@@ -3,7 +3,6 @@ extensions:
 - !load
   extension: KvJavaAppDiscovery
   instance: consul
-  scope: local
   config:
     key: "anycollect/jmx/"
   dependencies:
@@ -13,7 +12,6 @@ extensions:
 - !load
   extension: StaticJmxQueryProvider
   instance: stubMetrics
-  scope: local
   config:
     queries:
     - &histogram0
@@ -63,13 +61,11 @@ extensions:
 - !load
   extension: JvmMetrics
   instance: jvmMetrics
-  scope: local
 
 # Matcher
 - !load
   extension: StaticQueryMatcherResolver # JobFactory, or maybe move to PullEngine?
   instance: matcher
-  scope: local
   config:
     rules:
     - instanceId: "jmxtrans|fastjmx"
@@ -83,7 +79,6 @@ extensions:
 - !load
   extension: JmxReader
   instance: jmx
-  scope: global
   dependencies:
     discovery: !refs
     - consul
