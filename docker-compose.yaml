@@ -44,6 +44,7 @@ services:
     - GRAPHITE_HOST=graphite
     - GRAPHITE_PORT=2003
     - BLACKHOLE_PORT=6000
+    pid: "host"
     ports:
     - 6000:6000
     - 9001:9001
