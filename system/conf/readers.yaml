@@ -4,8 +4,8 @@ extensions:
   instance: pids
   config:
     watch:
-    - "/var/docker-run/anycollect/run/anycollect.pid"
-    - "/var/docker-run/blackhole/run/anycollect.pid"
+    - "/var/docker-run/anycollect.pid"
+    - "/var/docker-run/blackhole.pid"
 
 - !load
   extension: ProcessReader
@@ -30,9 +30,9 @@ extensions:
       source: drop # drop | meta | keep
       key:
         source: pid.file
-        target: process
+        target: instance
       values:
-      - source: "/var/docker-run/(.*)/run/anycollect\\.pid"
+      - source: "/var/docker-run/(.*)\\.pid"
         target: $1
 
 - !load

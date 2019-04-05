@@ -1,0 +1,2 @@
+--conf /anycollect/conf/anycollect.yaml
+--pid-file /var/run/anycollect.pid
