@@ -36,7 +36,7 @@ services:
     links:
     - graphite
     volumes:
-    - ${PWD}/anycollect/:/blackhole/
+    - ${PWD}/blackhole/:/anycollect/
     - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
