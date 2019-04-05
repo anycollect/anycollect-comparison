@@ -1,2 +1,2 @@
---conf /blackhole/conf/anycollect.yaml
+--conf /anycollect/conf/anycollect.yaml
 --pid-file /var/run/blackhole.pid
