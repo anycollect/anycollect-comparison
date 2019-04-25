@@ -1,6 +1,12 @@
 extensions:
 # Consul Discovery
 - !load
+  extension: ConsulKv
+  instance: consulKv
+  config:
+    host: !var CONSUL_HOST
+    port: !var CONSUL_PORT
+- !load
   extension: KvJavaAppDiscovery
   instance: consul
   config:
