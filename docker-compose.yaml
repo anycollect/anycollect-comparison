@@ -112,6 +112,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9100
@@ -126,6 +128,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9101
@@ -140,6 +144,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9102
@@ -154,6 +160,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9103
@@ -168,6 +176,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9104
@@ -182,6 +192,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9105
@@ -196,6 +208,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9106
@@ -210,6 +224,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9107
@@ -224,6 +240,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9108
@@ -238,6 +256,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9109
@@ -252,6 +272,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9110
@@ -266,6 +288,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9111
@@ -280,6 +304,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9112
@@ -294,6 +320,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9113
@@ -308,6 +336,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9114
@@ -322,6 +352,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9115
@@ -336,6 +368,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9116
@@ -350,6 +384,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9117
@@ -364,6 +400,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9118
@@ -378,6 +416,8 @@ services:
     restart: always
     links:
     - consul
+    volumes:
+    - /var/docker-run/:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9119

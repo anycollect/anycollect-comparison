@@ -1,0 +1,34 @@
+extensions:
+# Consul Discovery
+- !load
+  extension: KvJavaAppDiscovery
+  instance: consul
+  config:
+    key: "anycollect/jmx/"
+  dependencies:
+    kv: !ref consulKv
+
+- !load
+  extension: JvmMetrics
+  instance: jvmMetrics
+
+# Matcher
+- !load
+  extension: StaticQueryMatcherResolver
+  instance: matcher
+  config:
+    rules:
+    - instanceId: ".*"
+      queryId: "jvm.*"
+      period: 10
+
+# Reader
+- !load
+  extension: JmxReader
+  instance: jmx
+  dependencies:
+    discovery: !refs
+    - consul
+    queries: !refs
+    - jvmMetrics
+    matcher: !ref matcher

@@ -58,19 +58,12 @@ extensions:
       key: stub.histogram9
       mbean: "test:name=SampleHistogram9,k2=*,k1=*"
 
-- !load
-  extension: JvmMetrics
-  instance: jvmMetrics
-
 # Matcher
 - !load
   extension: StaticQueryMatcherResolver # JobFactory, or maybe move to PullEngine?
   instance: matcher
   config:
     rules:
-    - instanceId: "jmxtrans|fastjmx"
-      queryId: "jvm.*"
-      period: 10
     - instanceId: "stub-.*"
       queryId: "stub.*"
       period: 10
@@ -83,6 +76,5 @@ extensions:
     discovery: !refs
     - consul
     queries: !refs
-    - jvmMetrics
     - stubMetrics
     matcher: !ref matcher

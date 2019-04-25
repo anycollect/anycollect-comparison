@@ -21,12 +21,4 @@ extensions:
     - from: internal
       to: graphite
     - from: jmx
-      to: graphite
-      filters:
-      - type: acceptKey
-        startsWith: "jvm"
-      - type: deny
-    - from: jmx
       to: blackhole
-      filters:
-      - type: accept

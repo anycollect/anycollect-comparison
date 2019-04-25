@@ -4,8 +4,90 @@ extensions:
   instance: pids
   config:
     watch:
-    - "/var/docker-run/anycollect.pid"
-    - "/var/docker-run/blackhole.pid"
+    - file: "/var/docker-run/anycollect.pid"
+      targetId: anycollect.process
+      tags:
+        instance: anycollect
+    - file: "/var/docker-run/blackhole.pid"
+      targetId: blackhole.process
+      tags:
+        instance: blachole
+    - file: "/var/docker-run/stub-1.pid"
+      targetId: stub-1.process
+      tags:
+        instance: stub-1
+    - file: "/var/docker-run/stub-2.pid"
+      targetId: stub-2.process
+      tags:
+        instance: stub-2
+    - file: "/var/docker-run/stub-3.pid"
+      targetId: stub-3.process
+      tags:
+        instance: stub-3
+    - file: "/var/docker-run/stub-4.pid"
+      targetId: stub-4.process
+      tags:
+        instance: stub-4
+    - file: "/var/docker-run/stub-5.pid"
+      targetId: stub-5.process
+      tags:
+        instance: stub-5
+    - file: "/var/docker-run/stub-6.pid"
+      targetId: stub-6.process
+      tags:
+        instance: stub-6
+    - file: "/var/docker-run/stub-7.pid"
+      targetId: stub-7.process
+      tags:
+        instance: stub-7
+    - file: "/var/docker-run/stub-8.pid"
+      targetId: stub-8.process
+      tags:
+        instance: stub-8
+    - file: "/var/docker-run/stub-9.pid"
+      targetId: stub-9.process
+      tags:
+        instance: stub-9
+    - file: "/var/docker-run/stub-10.pid"
+      targetId: stub-10.process
+      tags:
+        instance: stub-10
+    - file: "/var/docker-run/stub-11.pid"
+      targetId: stub-11.process
+      tags:
+        instance: stub-11
+    - file: "/var/docker-run/stub-12.pid"
+      targetId: stub-12.process
+      tags:
+        instance: stub-12
+    - file: "/var/docker-run/stub-13.pid"
+      targetId: stub-13.process
+      tags:
+        instance: stub-13
+    - file: "/var/docker-run/stub-14.pid"
+      targetId: stub-14.process
+      tags:
+        instance: stub-14
+    - file: "/var/docker-run/stub-15.pid"
+      targetId: stub-15.process
+      tags:
+        instance: stub-15
+    - file: "/var/docker-run/stub-16.pid"
+      targetId: stub-16.process
+      tags:
+        instance: stub-16
+    - file: "/var/docker-run/stub-17.pid"
+      targetId: stub-17.process
+      tags:
+        instance: stub-17
+    - file: "/var/docker-run/stub-18.pid"
+      targetId: stub-18.process
+      tags:
+        instance: stub-18
+    - file: "/var/docker-run/stub-19.pid"
+      targetId: stub-19.process
+      tags:
+        instance: stub-19
 
 - !load
   extension: ProcessReader
@@ -14,26 +96,6 @@ extensions:
     discovery: !ref pids
   config:
     period: 10
-
-- !load
-  extension: Transformer
-  instance: replacePidFileToProcessName
-  config:
-    source: drop # drop | keep
-    filters:
-    - type: tag
-      state: present
-      key: pid.file
-      reply: accept
-    transformations:
-    - transform: tag
-      source: drop # drop | meta | keep
-      key:
-        source: pid.file
-        target: instance
-      values:
-      - source: "/var/docker-run/(.*)\\.pid"
-        target: $1
 
 - !load
   extension: SystemReader

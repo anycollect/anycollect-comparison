@@ -6,16 +6,22 @@ extensions:
     - file: writers.yaml
       instances: [slf4j, graphite]
     - file: readers.yaml
-      instances: [processReader, replacePidFileToProcessName, system]
+      instances: [processReader, system]
+    - file: jmx.yaml
+      instances: [jmx]
     pull:
       updatePeriod: 20
       pullPeriod: 10
+    internalMonitoring:
+      tags:
+        role: system
+        version: anycollect
     topology:
     - from: system
       to: graphite
-    - from: processReader
-      to: replacePidFileToProcessName
-    - from: replacePidFileToProcessName
+    - from: jmx
       to: graphite
-    - from: replacePidFileToProcessName
+    - from: processReader
+      to: graphite
+    - from: internal
       to: slf4j
