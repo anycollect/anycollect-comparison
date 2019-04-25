@@ -1,2 +1,3 @@
 --conf /anycollect/conf/anycollect.yaml
 --pid-file /var/run/blackhole.pid
+--logback-conf /anycollect/logback.xml
