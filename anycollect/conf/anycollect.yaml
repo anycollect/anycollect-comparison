@@ -9,6 +9,9 @@ extensions:
       instances: [slf4j, blackhole, graphite]
     - file: jmx.yaml
       instances: [jmx]
+    internalMonitoring:
+      tags:
+        role: anycollect
     pull:
       updatePeriod: 20
       pullPeriod: 10

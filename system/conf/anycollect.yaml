@@ -15,7 +15,6 @@ extensions:
     internalMonitoring:
       tags:
         role: system
-        version: anycollect
     topology:
     - from: system
       to: graphite

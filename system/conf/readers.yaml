@@ -11,7 +11,7 @@ extensions:
     - file: "/var/docker-run/blackhole.pid"
       targetId: blackhole.process
       tags:
-        instance: blachole
+        instance: blackhole
     - file: "/var/docker-run/stub-1.pid"
       targetId: stub-1.process
       tags:
