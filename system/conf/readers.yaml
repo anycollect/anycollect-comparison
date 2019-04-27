@@ -12,6 +12,10 @@ extensions:
       targetId: blackhole.process
       tags:
         instance: blackhole
+    - file: "/var/docker-run/stub-0.pid"
+      targetId: stub-0.process
+      tags:
+        instance: stub-0
     - file: "/var/docker-run/stub-1.pid"
       targetId: stub-1.process
       tags:
