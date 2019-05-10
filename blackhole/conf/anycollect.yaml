@@ -1,68 +1,13 @@
 extensions:
 - !load
-  # TODO use noop
-  extension: MeterRegistry
-  instance: registry
-  injectMode: auto
-# --- BLACKHOLE ---
-- !load
-  extension: DummyDeserializer
-  instance: dummy
-- !load
-  extension: NettyAsyncSocketReader
-  instance: blackhole
-  dependencies:
-    deserializer: !ref dummy
+  extension: Core
   config:
-    port: !var BLACKHOLE_PORT
-# --- DISCREPANCY ---
-- !load
-  extension: DiscrepancyProcessor
-  instance: discrepancy
-  config:
-    rules:
-    - filter: "stub.*"
-      group: anycollect
-      period: 10
-    - filter: "servers.*"
-      group: jmxtrans
-      period: 10
-    - filter: "fastjmx.*"
-      group: fastjmx
-      period: 10
-# --- GRAPHITE ---
-- !load
-  extension: GraphiteSerializer
-  instance: toTagGraphite
-  injectMode: manual
-- !load
-  extension: SocketWriter
-  instance: graphite
-  injectMode: manual
-  dependencies:
-    format: !ref toTagGraphite
-  config:
-    host: !var GRAPHITE_HOST
-    port: !var GRAPHITE_PORT
-    protocol: TCP
-# --- SLF4J ---
-- !load
-  extension: Slf4jWriter
-  instance: slf4j
-  injectMode: manual
-# --- ROUTER --
-- !load
-  extension: Router
-  instance: router
-  dependencies:
-    readers: !refs
-    - blackhole
-    processors: !refs
-    - discrepancy
-    writers: !refs
-    - graphite
-    - slf4j
-  config:
+    export:
+    - file: extensions.yaml
+      instances: [blackhole, discrepancy, graphite, slf4j]
+    internalMonitoring:
+      tags:
+        instance: anycollect-blackhole
     topology:
     - from: blackhole
       to: discrepancy

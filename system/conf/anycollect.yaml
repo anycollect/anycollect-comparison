@@ -14,7 +14,7 @@ extensions:
       pullPeriod: 10
     internalMonitoring:
       tags:
-        role: system
+        instance: anycollect-system
     topology:
     - from: system
       to: graphite

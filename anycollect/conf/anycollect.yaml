@@ -11,7 +11,7 @@ extensions:
       instances: [jmx]
     internalMonitoring:
       tags:
-        role: anycollect
+        instance: anycollect
     pull:
       updatePeriod: 20
       pullPeriod: 10

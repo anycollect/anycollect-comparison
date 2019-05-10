@@ -1,0 +1,45 @@
+extensions:
+# --- BLACKHOLE ---
+- !load
+  extension: DummyDeserializer
+  instance: dummy
+- !load
+  extension: NettyAsyncSocketReader
+  instance: blackhole
+  dependencies:
+    deserializer: !ref dummy
+  config:
+    port: !var BLACKHOLE_PORT
+# --- DISCREPANCY ---
+- !load
+  extension: DiscrepancyProcessor
+  instance: discrepancy
+  config:
+    rules:
+    - filter: "stub.*"
+      group: anycollect
+      period: 10
+    - filter: "servers.*"
+      group: jmxtrans
+      period: 10
+    - filter: "fastjmx.*"
+      group: fastjmx
+      period: 10
+# --- GRAPHITE ---
+- !load
+  extension: GraphiteSerializer
+  instance: toTagGraphite
+  injectMode: manual
+- !load
+  extension: SocketWriter
+  instance: graphite
+  dependencies:
+    format: !ref toTagGraphite
+  config:
+    host: !var GRAPHITE_HOST
+    port: !var GRAPHITE_PORT
+    protocol: TCP
+# --- SLF4J ---
+- !load
+  extension: Slf4jWriter
+  instance: slf4j
