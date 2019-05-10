@@ -435,7 +435,7 @@ LoadPlugin java
 {{ $jmxDefinition := .Value | parseJSON }}
     <Connection>
       ServiceURL "service:jmx:rmi:///jndi/rmi://{{ $jmxDefinition.host }}:{{ $jmxDefinition.port }}/jmxrmi"
-      Collect "compilation"
+      InstancePrefix "{{ $jmxDefinition.id }}"
       Collect "histogram0"
       Collect "histogram1"
       Collect "histogram2"
