@@ -9,9 +9,9 @@ extensions:
       tags:
         instance: anycollect
     - file: !exp "${PID_DIR}blackhole.pid"
-      targetId: blackhole.process
+      targetId: anycollect-blackhole.process
       tags:
-        instance: blackhole
+        instance: anycollect-blackhole
     - file: !exp "${PID_DIR}stub-0.pid"
       targetId: stub-0.process
       tags:
