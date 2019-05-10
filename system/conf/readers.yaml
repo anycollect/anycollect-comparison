@@ -4,91 +4,91 @@ extensions:
   instance: pids
   config:
     watch:
-    - file: "/var/docker-run/anycollect.pid"
+    - file: !exp "${PID_DIR}anycollect.pid"
       targetId: anycollect.process
       tags:
         instance: anycollect
-    - file: "/var/docker-run/blackhole.pid"
+    - file: !exp "${PID_DIR}blackhole.pid"
       targetId: blackhole.process
       tags:
         instance: blackhole
-    - file: "/var/docker-run/stub-0.pid"
+    - file: !exp "${PID_DIR}stub-0.pid"
       targetId: stub-0.process
       tags:
         instance: stub-0
-    - file: "/var/docker-run/stub-1.pid"
+    - file: !exp "${PID_DIR}stub-1.pid"
       targetId: stub-1.process
       tags:
         instance: stub-1
-    - file: "/var/docker-run/stub-2.pid"
+    - file: !exp "${PID_DIR}stub-2.pid"
       targetId: stub-2.process
       tags:
         instance: stub-2
-    - file: "/var/docker-run/stub-3.pid"
+    - file: !exp "${PID_DIR}stub-3.pid"
       targetId: stub-3.process
       tags:
         instance: stub-3
-    - file: "/var/docker-run/stub-4.pid"
+    - file: !exp "${PID_DIR}stub-4.pid"
       targetId: stub-4.process
       tags:
         instance: stub-4
-    - file: "/var/docker-run/stub-5.pid"
+    - file: !exp "${PID_DIR}stub-5.pid"
       targetId: stub-5.process
       tags:
         instance: stub-5
-    - file: "/var/docker-run/stub-6.pid"
+    - file: !exp "${PID_DIR}stub-6.pid"
       targetId: stub-6.process
       tags:
         instance: stub-6
-    - file: "/var/docker-run/stub-7.pid"
+    - file: !exp "${PID_DIR}stub-7.pid"
       targetId: stub-7.process
       tags:
         instance: stub-7
-    - file: "/var/docker-run/stub-8.pid"
+    - file: !exp "${PID_DIR}stub-8.pid"
       targetId: stub-8.process
       tags:
         instance: stub-8
-    - file: "/var/docker-run/stub-9.pid"
+    - file: !exp "${PID_DIR}stub-9.pid"
       targetId: stub-9.process
       tags:
         instance: stub-9
-    - file: "/var/docker-run/stub-10.pid"
+    - file: !exp "${PID_DIR}stub-10.pid"
       targetId: stub-10.process
       tags:
         instance: stub-10
-    - file: "/var/docker-run/stub-11.pid"
+    - file: !exp "${PID_DIR}stub-11.pid"
       targetId: stub-11.process
       tags:
         instance: stub-11
-    - file: "/var/docker-run/stub-12.pid"
+    - file: !exp "${PID_DIR}stub-12.pid"
       targetId: stub-12.process
       tags:
         instance: stub-12
-    - file: "/var/docker-run/stub-13.pid"
+    - file: !exp "${PID_DIR}stub-13.pid"
       targetId: stub-13.process
       tags:
         instance: stub-13
-    - file: "/var/docker-run/stub-14.pid"
+    - file: !exp "${PID_DIR}stub-14.pid"
       targetId: stub-14.process
       tags:
         instance: stub-14
-    - file: "/var/docker-run/stub-15.pid"
+    - file: !exp "${PID_DIR}stub-15.pid"
       targetId: stub-15.process
       tags:
         instance: stub-15
-    - file: "/var/docker-run/stub-16.pid"
+    - file: !exp "${PID_DIR}stub-16.pid"
       targetId: stub-16.process
       tags:
         instance: stub-16
-    - file: "/var/docker-run/stub-17.pid"
+    - file: !exp "${PID_DIR}stub-17.pid"
       targetId: stub-17.process
       tags:
         instance: stub-17
-    - file: "/var/docker-run/stub-18.pid"
+    - file: !exp "${PID_DIR}stub-18.pid"
       targetId: stub-18.process
       tags:
         instance: stub-18
-    - file: "/var/docker-run/stub-19.pid"
+    - file: !exp "${PID_DIR}stub-19.pid"
       targetId: stub-19.process
       tags:
         instance: stub-19

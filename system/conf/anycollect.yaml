@@ -23,6 +23,4 @@ extensions:
     - from: processReader
       to: graphite
     - from: internal
-      to: slf4j
-    - from: internal
       to: graphite

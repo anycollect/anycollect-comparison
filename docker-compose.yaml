@@ -18,7 +18,7 @@ services:
     - 8125:8125/udp
     - 8126:8126
     volumes:
-    - /var/docker-volumes/graphite/opt/graphite/storage/:/opt/graphite/storage/
+    - ${GRAPHITE_VOLUMES_DIR}:/opt/graphite/storage/
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -37,13 +37,13 @@ services:
     - graphite
     volumes:
     - ${PWD}/blackhole/:/anycollect/
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9001
-    - GRAPHITE_HOST=graphite
-    - GRAPHITE_PORT=2003
-    - BLACKHOLE_PORT=6000
+    - GRAPHITE_HOST
+    - GRAPHITE_PORT
+    - BLACKHOLE_PORT
     pid: "host"
     ports:
     - 6000:6000
@@ -60,8 +60,8 @@ services:
     - JMX_HOST
     - JMX_PORT=9002
     - SERVICE_ID=jmxtrans
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9002:9002
@@ -77,8 +77,8 @@ services:
     - JMX_HOST
     - JMX_PORT=9003
     - SERVICE_ID=fastjmx
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9003:9003
@@ -92,16 +92,16 @@ services:
     - graphite
     volumes:
     - ${PWD}/anycollect/:/anycollect/
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9000
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
-    - GRAPHITE_HOST=graphite
-    - GRAPHITE_PORT=2003
-    - BLACKHOLE_HOST=blackhole
-    - BLACKHOLE_PORT=6000
+    - CONSUL_HOST
+    - CONSUL_PORT
+    - GRAPHITE_HOST
+    - GRAPHITE_PORT
+    - BLACKHOLE_HOST
+    - BLACKHOLE_PORT
     pid: "host"
     ports:
     - 9000:9000
@@ -113,13 +113,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9100
     - SERVICE_ID=stub-0
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9100:9100
@@ -130,13 +130,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9101
     - SERVICE_ID=stub-1
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9101:9101
@@ -147,13 +147,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9102
     - SERVICE_ID=stub-2
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9102:9102
@@ -164,13 +164,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9103
     - SERVICE_ID=stub-3
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9103:9103
@@ -181,13 +181,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9104
     - SERVICE_ID=stub-4
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9104:9104
@@ -198,13 +198,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9105
     - SERVICE_ID=stub-5
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9105:9105
@@ -215,13 +215,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9106
     - SERVICE_ID=stub-6
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9106:9106
@@ -232,13 +232,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9107
     - SERVICE_ID=stub-7
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9107:9107
@@ -249,13 +249,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9108
     - SERVICE_ID=stub-8
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9108:9108
@@ -266,13 +266,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9109
     - SERVICE_ID=stub-9
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9109:9109
@@ -283,13 +283,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9110
     - SERVICE_ID=stub-10
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9110:9110
@@ -300,13 +300,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9111
     - SERVICE_ID=stub-11
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9111:9111
@@ -317,13 +317,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9112
     - SERVICE_ID=stub-12
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9112:9112
@@ -334,13 +334,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9113
     - SERVICE_ID=stub-13
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9113:9113
@@ -351,13 +351,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9114
     - SERVICE_ID=stub-14
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9114:9114
@@ -368,13 +368,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9115
     - SERVICE_ID=stub-15
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9115:9115
@@ -385,13 +385,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9116
     - SERVICE_ID=stub-16
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9116:9116
@@ -402,13 +402,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9117
     - SERVICE_ID=stub-17
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9117:9117
@@ -419,13 +419,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9118
     - SERVICE_ID=stub-18
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9118:9118
@@ -436,13 +436,13 @@ services:
     links:
     - consul
     volumes:
-    - /var/docker-run/:/var/run/
+    - ${PID_DIR}:/var/run/
     environment:
     - JMX_HOST
     - JMX_PORT=9119
     - SERVICE_ID=stub-19
-    - CONSUL_HOST=consul
-    - CONSUL_PORT=8500
+    - CONSUL_HOST
+    - CONSUL_PORT
     pid: "host"
     ports:
     - 9119:9119
